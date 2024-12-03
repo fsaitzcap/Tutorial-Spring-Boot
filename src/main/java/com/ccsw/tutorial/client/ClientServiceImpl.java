@@ -53,7 +53,8 @@ public class ClientServiceImpl implements ClientService {
         } else {
             client = this.clientRepository.findById(id).orElse(null);
 
-            if (clientRepository.existsByName(dto.getName())) {
+            if (clientRepository.existsByName(dto.getName()) &&
+            !client.getName().equals(dto.getName())) {
                 throw new ConflictException("Error: Nombre de cliente en ya en uso, edite con otro nombre");
             }
         }
